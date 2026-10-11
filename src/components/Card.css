@@ -19,11 +19,18 @@
   cursor: pointer;
 }
 
-/* tarjeta "larga": toma 2 columnas del grid en vez de 1. Si el grid del
-   padre en ese momento solo tiene 1 columna (pantallas angostas), el
-   navegador la recorta sola a esa 1 columna -> no hace falta media query. */
+/* tarjeta "larga": toma 2 columnas del grid en vez de 1. Ojo: si el grid
+   solo tiene 1 columna, span 2 NO se recorta solo -> el navegador inventa
+   una 2a columna y la página se sale de la pantalla en el celular. Por eso
+   en pantallas angostas vuelve a ocupar 1 sola columna. */
 .card-ancha {
   grid-column: span 2;
+}
+
+@media (max-width: 640px) {
+  .card-ancha {
+    grid-column: auto;
+  }
 }
 
 .card-clickable:hover {

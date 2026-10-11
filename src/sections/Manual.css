@@ -28,7 +28,9 @@
 
 .manual-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  /* min(260px, 100%): en celulares muy angostos la columna se encoge en
+     vez de desbordar */
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
   gap: clamp(16px, 2.2vw, 28px);
   /* sin esto, el grid estira todas las tarjetas a la altura de la más
      alta -> cada una toma solo el alto que su propio contenido pide */

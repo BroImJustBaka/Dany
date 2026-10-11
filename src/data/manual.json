@@ -1,0 +1,37 @@
+[
+  {
+    "color": "var(--clr-terracotta)",
+    "titulo": "Su café",
+    "mensaje": "No tomas café porque no te viene bien la cafeína, te da taquicardia y si de por si eres bien hiperactiva te pones todavía peor, que te da por temblar y nono muy mal todo"
+  },
+  {
+    "color": "var(--clr-sand)",
+    "titulo": "Sus frases",
+    "mensaje": "\"Quiero novio\", \n \"El caso esssss\", \"no me hables\", \"come cola\", \"hiiiiii\", hay más pero pasaría tu cumpleaños y todavía no acabaría"
+  },
+  {
+    "color": "var(--clr-terracotta-light)",
+    "titulo": "Su comida",
+    "mensaje": "Cuando te conocí me dijiste que tu comida favorita eran los nuggets y vas a decir \"aun me encantan\" y si me consta pero total entraste a la prepa y te empezaron a encantar los boneless y como tienes esta cosa de que te gusta todo lo italiano tmb te gusta la pasta, la pizza pero quiero pensar que la pizza al horno y no la normal porque sería demasiado normie la normal, dios esto quedó muy largo"
+  },
+  {
+    "color": "var(--clr-brown-warm)",
+    "titulo": "Su horario",
+    "mensaje": "Esta si me la sé, te levantas como un 9-10 am pero todos los demás se levantan bien temprano y eso te caga porque piensas que para que levantarse tan temprano y ni se diga de cuando tu te tienes que levantar temprano porque tienes unas jetas, si de por si, ahora las jetas de me levanté antes de mi hora y la voz ronca una locura, si tienes tiempo contestas los mensajes o si estás haciendo algo que ocupe tu atención se te olvida y ya contestas cuando te acuerdas o cuando ves q no contestaste nada y de a que horas te duermes pues sabrá dios, ni tu sabes"
+  },
+  {
+    "color":"var(--clr-wine)",
+    "titulo":"Crushes",
+    "mensaje":"Ay no aquí si no voy a acabar: Finn Wolfhard, Ni-ki, nuestro novio la hormiga, Bellingham, Luke Castellan, Draco Malfoy, si tengo tu lista pero quise agarrar de los que más me acordaba porque te gusta todo a la chingada"
+  },
+  {
+    "color":"var(--clr-mustard)",
+    "titulo":"Artistas",
+    "mensaje":"No existe algo que tu no escuches ni por error más que kanye west porque no eres así de cool como yo pero así a puro hacer memoria y meterme a usmear en tu spotify: la Taylor, Harry Styles, Danny Ocean, Conan Gray, Morat, TXT, straykids, bts, enhyphen, One Direction, Chase Atlantic, 5SOS???? y ya son de los que me acuerdo pido perdon si olvidé algo"
+  },
+  {
+    "color":"var(--clr-brown-deep)",
+    "titulo":"Peliculas",
+    "mensaje":"Fácil, tu top 5 (sabrá dios el orden) Pitch Perfect, Call me by your name, mamma mia, before i fall y flipped (esa también me encanta), sabrá dios si sigue en pie el top como tal pero es el q recuerdo, hola hiciste una presentación y es la misma madre pero en el top 4 pusiste ratatouille"
+  } 
+]

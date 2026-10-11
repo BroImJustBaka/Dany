@@ -1,0 +1,106 @@
+.bocetos {
+  position: relative;
+  z-index: 0;
+  padding: clamp(56px, 9vw, 140px) clamp(24px, 7vw, 110px);
+  background: linear-gradient(
+    180deg,
+    var(--clr-brown-deep) 0%,
+    var(--clr-sand) 26%,
+    var(--clr-sand) 100%
+  );
+}
+
+.bocetos-eyebrow {
+  font-family: var(--font-hand);
+  font-size: clamp(20px, 2.4vw, 30px);
+  color: var(--clr-wine);
+  margin: 0;
+}
+
+.bocetos-title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 6vw, 76px);
+  line-height: 1.02;
+  margin: 4px 0 clamp(36px, 5vw, 64px);
+  color: var(--clr-choco);
+  max-width: 16ch;
+}
+
+/* la línea punteada vive como pseudo-elemento del contenedor, no como
+   un div aparte -> así los :nth-child de abajo solo cuentan tarjetas
+   reales, sin tener que saltarse un hermano decorativo */
+.bocetos-lista {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(22px, 3vw, 40px);
+}
+
+.bocetos-lista::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(130, 81, 70, 0.55) 0 10px,
+    transparent 10px 20px
+  );
+}
+
+.boceto-item {
+  position: relative;
+  margin-left: clamp(44px, 6vw, 90px);
+  max-width: 58ch;
+  padding: clamp(20px, 2.4vw, 30px);
+  background: rgba(223, 205, 195, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 20px 44px rgba(60, 28, 25, 0.16), 0 5px 12px rgba(60, 28, 25, 0.1);
+}
+
+/* zigzag: las tarjetas non (1a, 3a...) van pegadas a la línea, las
+   pares (2a, 4a...) más recorridas a la derecha */
+.boceto-item:nth-child(even) {
+  margin-left: clamp(70px, 12vw, 220px);
+}
+
+/* el puntito sobre la línea, solo en las tarjetas pegadas a ella */
+.boceto-item:nth-child(odd)::before {
+  content: '';
+  position: absolute;
+  left: clamp(-34px, -3.5vw, -70px);
+  top: 26px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--clr-brown-warm);
+}
+
+.boceto-fecha {
+  margin: 0 0 6px;
+  font-family: var(--font-hand);
+  font-size: 24px;
+  color: var(--clr-brown-warm);
+}
+
+.boceto-autor {
+  color: var(--clr-choco);
+}
+
+.boceto-titulo {
+  font-family: var(--font-display);
+  font-size: clamp(21px, 2.2vw, 28px);
+  margin: 0 0 8px;
+  color: var(--clr-choco);
+}
+
+.boceto-texto {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: var(--clr-wine);
+}

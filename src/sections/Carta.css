@@ -1,0 +1,397 @@
+.carta-seccion {
+  position: relative;
+  z-index: 0;
+  padding: clamp(70px, 10vw, 160px) clamp(24px, 7vw, 110px);
+  background: linear-gradient(
+    180deg,
+    var(--clr-almost-black) 0%,
+    var(--clr-choco) 24%,
+    var(--clr-choco) 100%
+  );
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.carta-eyebrow {
+  font-family: var(--font-hand);
+  font-size: clamp(20px, 2.4vw, 30px);
+  color: var(--clr-terracotta);
+  margin: 0;
+}
+
+.carta-title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 6vw, 76px);
+  line-height: 1.02;
+  margin: 0;
+  color: var(--clr-cream);
+}
+
+.carta-intro {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 44ch;
+  color: var(--clr-terracotta-light);
+}
+
+.carta-btn {
+  margin-top: 14px;
+  border: none;
+  padding: 16px 34px;
+  border-radius: 999px;
+  background: var(--clr-cream);
+  color: var(--clr-wine);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 17px;
+  cursor: pointer;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.carta-btn:hover {
+  background: var(--clr-terracotta-light);
+  transform: translateY(-2px);
+}
+
+/* fondo difuminado, común a las tres fases */
+.carta-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(18, 10, 9, 0.62);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  animation: carta-aparecer 0.4s ease both;
+}
+
+@keyframes carta-aparecer {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- 1. el recuadro de la contraseña (NO tapa la pantalla) --- */
+
+.carta-clave {
+  position: fixed;
+  z-index: 102;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(92vw, 400px);
+  padding: clamp(26px, 4vw, 36px);
+  border-radius: 20px;
+  background: linear-gradient(180deg, #fbf7ee 0%, #f2e9db 100%);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+  text-align: center;
+  animation: carta-clave-entrar 0.35s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+@keyframes carta-clave-entrar {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -46%) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.carta-clave-titulo {
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--clr-wine);
+}
+
+.carta-clave-texto {
+  margin: 0 0 20px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--clr-brown-warm);
+}
+
+.carta-clave-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 2px solid rgba(130, 81, 70, 0.35);
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
+  color: var(--clr-wine);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.carta-clave-input:focus {
+  border-color: var(--clr-wine);
+}
+
+.carta-clave-input--error {
+  border-color: #b4423f;
+  animation: carta-sacudir 0.4s ease;
+}
+
+@keyframes carta-sacudir {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.carta-clave-error {
+  margin: 12px 0 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: #b4423f;
+}
+
+.carta-clave-botones {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.carta-clave-cancelar,
+.carta-clave-abrir {
+  flex: 1;
+  padding: 13px 18px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.carta-clave-cancelar {
+  border: 2px solid rgba(130, 81, 70, 0.35);
+  background: transparent;
+  color: var(--clr-brown-warm);
+}
+
+.carta-clave-cancelar:hover {
+  background: rgba(130, 81, 70, 0.1);
+}
+
+.carta-clave-abrir {
+  border: none;
+  background: var(--clr-wine);
+  color: var(--clr-cream);
+}
+
+.carta-clave-abrir:hover {
+  background: var(--clr-choco);
+  transform: translateY(-1px);
+}
+
+/* ---------- 2. la hoja arrugada desdoblándose ----------------------- */
+
+.carta-escena {
+  position: fixed;
+  inset: 0;
+  z-index: 101;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.carta-bola {
+  position: relative;
+  width: min(92vw, 720px);
+  height: calc(
+    var(--lineas) * var(--altura-linea) + var(--padding-arriba) + var(--padding-abajo)
+  );
+  background-color: #fbf7ee;
+  /* las mismas rayas de la hoja real, para que al terminar el
+     desarrugado el papel ya se vea idéntico a la carta */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--altura-linea) - 1px),
+    rgba(108, 132, 186, 0.38) calc(var(--altura-linea) - 1px),
+    rgba(108, 132, 186, 0.38) var(--altura-linea)
+  );
+  background-position: 0 calc(var(--padding-arriba) - var(--desfase-raya));
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+  transform-origin: 50% 55%;
+  animation: carta-desarrugar 1700ms cubic-bezier(0.24, 0.68, 0.3, 1) both;
+}
+
+/* capa de pliegues: se desvanece conforme el papel se estira */
+.carta-arrugas {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      118deg,
+      rgba(112, 88, 64, 0.18) 0 1px,
+      transparent 1px 26px
+    ),
+    repeating-linear-gradient(
+      43deg,
+      rgba(112, 88, 64, 0.15) 0 1px,
+      transparent 1px 34px
+    ),
+    repeating-linear-gradient(
+      78deg,
+      rgba(112, 88, 64, 0.12) 0 1px,
+      transparent 1px 19px
+    ),
+    radial-gradient(58% 42% at 32% 26%, rgba(0, 0, 0, 0.18), transparent 70%),
+    radial-gradient(52% 46% at 71% 69%, rgba(0, 0, 0, 0.16), transparent 72%);
+  animation: carta-pliegues 1700ms ease-out both;
+}
+
+@keyframes carta-desarrugar {
+  0% {
+    transform: scale(0.15) rotate(-27deg);
+    clip-path: polygon(
+      17% 13%, 36% 5%, 62% 10%, 87% 17%, 94% 38%, 90% 62%,
+      83% 87%, 63% 95%, 38% 91%, 14% 85%, 8% 61%, 12% 33%
+    );
+    filter: contrast(1.18) brightness(0.9);
+  }
+  16% {
+    transform: scale(0.24) rotate(13deg);
+    clip-path: polygon(
+      15% 11%, 35% 4%, 64% 8%, 89% 14%, 95% 37%, 92% 63%,
+      85% 89%, 64% 96%, 36% 93%, 12% 88%, 6% 62%, 10% 31%
+    );
+  }
+  36% {
+    transform: scale(0.47) rotate(-11deg);
+    clip-path: polygon(
+      11% 8%, 34% 3%, 64% 7%, 92% 11%, 96% 36%, 94% 64%,
+      89% 92%, 65% 97%, 35% 94%, 8% 91%, 5% 63%, 7% 32%
+    );
+    filter: contrast(1.1) brightness(0.95);
+  }
+  58% {
+    transform: scale(0.76) rotate(6deg);
+    clip-path: polygon(
+      4% 3%, 33% 1%, 67% 2%, 97% 4%, 99% 34%, 98% 66%,
+      96% 97%, 66% 99%, 34% 98%, 3% 97%, 1% 66%, 2% 33%
+    );
+  }
+  78% {
+    transform: scale(1.05) rotate(-2.4deg);
+    clip-path: polygon(
+      1% 0%, 33% 0%, 67% 0%, 99% 1%, 100% 33%, 100% 67%,
+      99% 99%, 67% 100%, 33% 100%, 1% 99%, 0% 67%, 0% 33%
+    );
+    filter: contrast(1.03) brightness(0.99);
+  }
+  90% {
+    transform: scale(0.985) rotate(0.9deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    clip-path: polygon(
+      0% 0%, 33% 0%, 67% 0%, 100% 0%, 100% 33%, 100% 67%,
+      100% 100%, 67% 100%, 33% 100%, 0% 100%, 0% 67%, 0% 33%
+    );
+    filter: contrast(1) brightness(1);
+  }
+}
+
+@keyframes carta-pliegues {
+  0%,
+  20% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---------- 3. el destello que tapa la costura ---------------------- */
+
+.carta-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  pointer-events: none;
+  background: rgba(255, 248, 235, 0.95);
+  animation: carta-flash 700ms ease-out both;
+}
+
+@keyframes carta-flash {
+  0% {
+    opacity: 0;
+  }
+  38% {
+    opacity: 0.92;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---------- 4. la carta ya abierta ---------------------------------- */
+
+.carta-lectura {
+  position: fixed;
+  inset: 0;
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(18px, 4vh, 44px) 16px clamp(28px, 6vh, 60px);
+  overflow-y: auto;
+  scroll-snap-type: y proximity;
+  animation: carta-aparecer 0.3s ease both;
+}
+
+.carta-cerrar {
+  position: fixed;
+  z-index: 103;
+  top: clamp(16px, 3vw, 30px);
+  right: clamp(16px, 3vw, 30px);
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(223, 205, 195, 0.18);
+  color: var(--clr-cream);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.2s ease;
+}
+
+.carta-cerrar:hover {
+  background: rgba(223, 205, 195, 0.34);
+}

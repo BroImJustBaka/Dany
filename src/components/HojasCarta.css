@@ -1,0 +1,110 @@
+.hojas {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(20px, 4vh, 42px);
+}
+
+.hoja {
+  position: relative;
+  width: min(92vw, 720px);
+  height: calc(
+    var(--lineas) * var(--altura-linea) + var(--padding-arriba) + var(--padding-abajo)
+  );
+  flex: none;
+  background-color: #fbf7ee;
+  border-radius: 3px;
+  overflow: hidden;
+  scroll-snap-align: center;
+  box-shadow:
+    0 30px 70px rgba(20, 12, 10, 0.5),
+    0 6px 16px rgba(20, 12, 10, 0.35);
+}
+
+/* las rayas del cuaderno. La primera raya cae justo debajo del primer
+   renglón de texto porque el patrón arranca en --padding-arriba y la
+   línea vive al final de cada repetición */
+.hoja::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--altura-linea) - 1px),
+    rgba(108, 132, 186, 0.38) calc(var(--altura-linea) - 1px),
+    rgba(108, 132, 186, 0.38) var(--altura-linea)
+  );
+  background-position: 0 calc(var(--padding-arriba) - var(--desfase-raya));
+}
+
+/* el margen rojo de la izquierda */
+.hoja::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--margen-izq) - 22px);
+  width: 1px;
+  background: rgba(196, 92, 92, 0.55);
+}
+
+.hoja-cuerpo {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: var(--padding-arriba) var(--margen-der) var(--padding-abajo)
+    var(--margen-izq);
+}
+
+.hoja-p {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: var(--tamano-texto);
+  line-height: var(--altura-linea);
+  color: #2b3a67;
+  overflow-wrap: break-word;
+}
+
+/* el renglón en blanco entre párrafos: exactamente una línea, para no
+   romper la alineación con las rayas */
+.hoja-p--sep {
+  margin-top: var(--altura-linea);
+}
+
+.hoja-p--firma {
+  text-align: right;
+  font-size: calc(var(--tamano-texto) * 1.15);
+}
+
+.hoja-num {
+  position: absolute;
+  z-index: 2;
+  right: var(--margen-der);
+  bottom: 14px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: rgba(43, 58, 103, 0.4);
+}
+
+/* la hoja fantasma que usa el algoritmo para medir */
+.hoja--medidor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: auto;
+  visibility: hidden;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+.hoja--medidor .hoja-cuerpo {
+  height: auto;
+}
+
+.hoja--medidor::before,
+.hoja--medidor::after {
+  display: none;
+}

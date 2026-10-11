@@ -1,0 +1,64 @@
+.card {
+  position: relative;
+  /* padding generoso a propósito: con border-radius tan orgánico, la
+     curva "come" espacio en las esquinas -> si el padding es corto,
+     el texto se ve como si se saliera del contorno */
+  padding: clamp(28px, 3.4vw, 42px);
+  background: rgba(223, 205, 195, 0.42);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 26px 60px rgba(60, 28, 25, 0.14),
+    0 8px 18px rgba(130, 81, 70, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-clickable {
+  cursor: pointer;
+}
+
+/* tarjeta "larga": toma 2 columnas del grid en vez de 1. Si el grid del
+   padre en ese momento solo tiene 1 columna (pantallas angostas), el
+   navegador la recorta sola a esa 1 columna -> no hace falta media query. */
+.card-ancha {
+  grid-column: span 2;
+}
+
+.card-clickable:hover {
+  transform: translateY(-2px);
+}
+
+.card-dot {
+  width: 44px;
+  height: 44px;
+  border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 23px;
+  margin: 0 0 8px;
+  color: var(--clr-choco);
+}
+
+.card-message {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--clr-wine);
+  /* si alguien mete una palabra/URL larguísima, que se parta en vez
+     de desbordar la tarjeta */
+  overflow-wrap: break-word;
+}
+
+.card-author {
+  margin: 16px 0 0;
+  text-align: left;
+  font-family: var(--font-hand);
+  font-size: 20px;
+  color: var(--clr-brown-warm);
+}

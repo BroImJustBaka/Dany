@@ -1,0 +1,392 @@
+/* ============ la sala ============ */
+
+.anecdotas {
+  position: relative;
+  z-index: 0;
+  padding: clamp(56px, 9vw, 140px) clamp(24px, 7vw, 110px);
+  /* arranca y termina en terracota: así empata con el final de Palabras
+     (arriba) y con el inicio de Memory dump (abajo), y en medio se
+     oscurece a café para que se sienta como otro cuarto */
+  background: linear-gradient(
+    180deg,
+    var(--clr-terracotta) 0%,
+    var(--clr-brown-warm) 45%,
+    var(--clr-terracotta) 100%
+  );
+  color: var(--clr-cream);
+}
+
+/* dos columnas: texto a la izquierda, montoncito de fotos a la derecha */
+.anecdotas-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: clamp(40px, 6vw, 90px);
+}
+
+.anecdotas-eyebrow {
+  font-family: var(--font-hand);
+  font-size: clamp(20px, 2.4vw, 30px);
+  color: var(--clr-cream);
+  margin: 0;
+}
+
+.anecdotas-title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 6vw, 76px);
+  line-height: 1.02;
+  margin: 4px 0 10px;
+  color: var(--clr-cream);
+  max-width: 16ch;
+}
+
+.anecdotas-intro {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 40ch;
+  color: var(--clr-terracotta-light);
+}
+
+/* ---- el botón: un montón de 3 polaroids encimadas ---- */
+
+.anecdotas-mazo {
+  position: relative;
+  justify-self: center;
+  width: clamp(210px, 24vw, 290px);
+  aspect-ratio: 4 / 5;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.anecdotas-mazo:focus-visible {
+  outline: 3px dashed var(--clr-cream);
+  outline-offset: 18px;
+  border-radius: 12px;
+}
+
+.anecdotas-mazo-foto {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: var(--clr-cream);
+  box-shadow: 0 18px 40px rgba(45, 31, 30, 0.28), 0 4px 10px rgba(45, 31, 30, 0.2);
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.anecdotas-mazo-foto--3 {
+  background: #cdb9ad;
+  transform: translate(-16px, 10px) rotate(-9deg);
+}
+
+.anecdotas-mazo-foto--2 {
+  background: #d6c3b8;
+  transform: translate(14px, 6px) rotate(7deg);
+}
+
+/* la de hasta arriba: marco tipo polaroid con su "foto" y el texto abajo */
+.anecdotas-mazo-foto--1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+  padding: 14px 14px 22px;
+  text-align: center;
+  transform: rotate(-2deg);
+}
+
+.anecdotas-mazo-foto--1::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  bottom: 30%;
+  border-radius: 4px;
+  /* la foto llega por la variable --portada (inline en Anecdotas.jsx).
+     Encima un brillito suave, como reflejo de papel fotográfico; el
+     arena de abajo solo se ve si la imagen no cargara. Centrada un poco
+     arriba de la mitad para que queden las caras, no el regalo. */
+  background:
+    radial-gradient(60% 50% at 30% 25%, rgba(255, 255, 255, 0.18), transparent 70%),
+    var(--portada, none) center 38% / cover no-repeat,
+    var(--clr-sand);
+  box-shadow: inset 0 0 0 1px rgba(60, 28, 25, 0.12);
+}
+
+.anecdotas-mazo-cinta {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 90px;
+  height: 26px;
+  transform: translateX(-50%) rotate(-4deg);
+  background: var(--clr-mustard);
+  opacity: 0.85;
+  z-index: 1;
+}
+
+.anecdotas-mazo-label {
+  position: relative;
+  font-family: var(--font-hand);
+  font-size: clamp(22px, 2.3vw, 28px);
+  line-height: 1.1;
+  color: var(--clr-wine);
+}
+
+.anecdotas-mazo-pista {
+  position: relative;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--clr-brown-warm);
+}
+
+/* al pasar el cursor el montón se abre en abanico y la de arriba se levanta */
+.anecdotas-mazo:hover .anecdotas-mazo-foto--1,
+.anecdotas-mazo:focus-visible .anecdotas-mazo-foto--1 {
+  transform: translateY(-12px) rotate(-4deg);
+}
+
+.anecdotas-mazo:hover .anecdotas-mazo-foto--2,
+.anecdotas-mazo:focus-visible .anecdotas-mazo-foto--2 {
+  transform: translate(30px, 2px) rotate(12deg);
+}
+
+.anecdotas-mazo:hover .anecdotas-mazo-foto--3,
+.anecdotas-mazo:focus-visible .anecdotas-mazo-foto--3 {
+  transform: translate(-32px, 12px) rotate(-15deg);
+}
+
+.anecdotas-mazo:active .anecdotas-mazo-foto--1 {
+  transform: translateY(-4px) rotate(-3deg) scale(0.98);
+}
+
+/* ============ el panel de pantalla completa ============ */
+
+/* capa de fondo aparte del panel: mismo motivo que en Palabras.css */
+.anecdotas-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(45, 31, 30, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* tres renglones: barra de arriba, la foto al centro, acciones abajo */
+.anecdotas-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 101;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: clamp(18px, 3vh, 32px);
+  padding: clamp(18px, 3vw, 34px) clamp(18px, 4vw, 56px) clamp(22px, 4vw, 40px);
+  overflow: hidden; /* el scroll vive solo en .anecdotas-scroll */
+  background: linear-gradient(180deg, var(--clr-brown-warm) 0%, var(--clr-choco) 100%);
+  color: var(--clr-cream);
+  animation: anecdotas-slide-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes anecdotas-slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.anecdotas-barra,
+.anecdotas-acciones {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.anecdotas-contador,
+.anecdotas-esc {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: clamp(20px, 2.2vw, 26px);
+  color: var(--clr-terracotta-light);
+}
+
+.anecdotas-esc {
+  font-size: 18px;
+  opacity: 0.7;
+}
+
+.anecdotas-close {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(223, 205, 195, 0.14);
+  color: var(--clr-cream);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.2s ease;
+}
+
+.anecdotas-close:hover {
+  background: rgba(223, 205, 195, 0.28);
+}
+
+/* el renglón de en medio: aquí (y solo aquí) hace scroll si la anécdota
+   es larguísima. Los márgenes negativos + padding le dan aire para que
+   la cinta, la sombra y la inclinación de la foto no queden recortadas.
+   La letra se ajusta con --escala, ver useTextoQueQuepa.js */
+.anecdotas-scroll {
+  position: relative; /* offsetParent de la foto, lo usa useTextoQueQuepa */
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  margin: 0 calc(-1 * clamp(18px, 4vw, 56px));
+  padding: 26px clamp(18px, 4vw, 56px) 30px;
+}
+
+/* la polaroid grande con la anécdota */
+.anecdotas-foto {
+  position: relative;
+  /* margin:auto la centra cuando cabe; cuando no, arranca desde arriba */
+  flex: none;
+  margin: auto;
+  /* si la letra se tuvo que encoger, la foto se ensancha para ocupar más
+     pantalla en vez de hacerse una tira larguísima */
+  width: min(100%, calc(560px / var(--escala, 1)), 820px);
+  padding: clamp(30px, 4vw, 44px) clamp(24px, 4vw, 40px) clamp(30px, 4vw, 44px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* el <Fundido /> hereda este gap */
+  border-radius: 8px;
+  background: linear-gradient(180deg, #fbf7ee 0%, var(--clr-cream) 100%);
+  color: var(--clr-wine);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45), 0 8px 18px rgba(0, 0, 0, 0.25);
+  /* gira de la inclinación de una anécdota a la de la siguiente */
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* dentro de la foto el texto va alineado a la izquierda, como nota a mano */
+.anecdotas-foto .fundido {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* la cinta adhesiva: su color viaja de la anécdota anterior a la nueva */
+.anecdotas-cinta {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  width: 120px;
+  height: 30px;
+  transform: translateX(-50%) rotate(-3deg);
+  opacity: 0.88;
+  transition: background-color 520ms ease;
+}
+
+.anecdotas-fecha {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: 22px;
+  color: var(--clr-brown-warm);
+}
+
+.anecdotas-titulo {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: max(19px, calc(clamp(24px, 3vw, 34px) * var(--escala, 1)));
+  line-height: 1.15;
+  color: var(--clr-choco);
+}
+
+.anecdotas-relato {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: max(14px, calc(clamp(16px, 1.6vw, 18px) * var(--escala, 1)));
+  line-height: 1.75;
+  color: var(--clr-wine);
+  overflow-wrap: break-word;
+  white-space: pre-line; /* respeta los \n del JSON */
+}
+
+.anecdotas-autor {
+  margin: 6px 0 0;
+  font-family: var(--font-hand);
+  font-size: 22px;
+  color: var(--clr-brown-warm);
+}
+
+.anecdotas-otra {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 999px;
+  background: var(--clr-cream);
+  color: var(--clr-wine);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.anecdotas-otra:hover {
+  background: var(--clr-terracotta-light);
+  transform: translateY(-2px);
+}
+
+.anecdotas-otra span {
+  font-size: 19px;
+  transition: transform 0.4s ease;
+}
+
+.anecdotas-otra:hover span {
+  transform: rotate(180deg);
+}
+
+/* ============ pantallas angostas ============ */
+
+@media (max-width: 760px) {
+  .anecdotas-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .anecdotas-mazo {
+    margin-top: 12px;
+  }
+
+  .anecdotas-esc {
+    display: none; /* en celular no hay tecla esc */
+  }
+
+  .anecdotas-acciones {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anecdotas-foto,
+  .anecdotas-cinta,
+  .anecdotas-mazo-foto {
+    transition-duration: 120ms;
+  }
+}

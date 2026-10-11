@@ -1,0 +1,77 @@
+/* El contenedor copia el acomodo del panel que lo contiene (columna,
+   centrado) y hereda su mismo gap -> meter este div en medio no mueve
+   ni un pixel de lo que ya estaba. */
+.fundido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: inherit;
+  width: 100%;
+  /* le avisamos al navegador qué va a animar: el blur es caro y así lo
+     manda a la GPU desde antes en vez de tironear en el primer frame */
+  will-change: filter, opacity, transform;
+}
+
+/* mientras el contenido viejo se va, no debe poder recibir clicks:
+   ya no es el mensaje "real", solo el fantasma que se desvanece */
+.fundido--saliendo {
+  pointer-events: none;
+  animation: fundido-sale var(--fundido-mitad, 260ms) ease-in both;
+}
+
+.fundido--entrando {
+  animation: fundido-entra var(--fundido-mitad, 260ms) ease-out both;
+}
+
+@keyframes fundido-sale {
+  from {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    filter: blur(14px);
+    transform: scale(0.98);
+  }
+}
+
+@keyframes fundido-entra {
+  from {
+    opacity: 0;
+    filter: blur(14px);
+    transform: scale(1.02);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+/* si la persona pidió menos animación en su sistema, dejamos solo un
+   fundido de opacidad cortito (sin blur ni escala) */
+@media (prefers-reduced-motion: reduce) {
+  .fundido--saliendo,
+  .fundido--entrando {
+    animation-duration: 120ms;
+  }
+
+  @keyframes fundido-sale {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fundido-entra {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

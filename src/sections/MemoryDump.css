@@ -1,0 +1,112 @@
+.memoria {
+  position: relative;
+  z-index: 0;
+  padding: clamp(56px, 9vw, 140px) 0 clamp(56px, 9vw, 140px) clamp(24px, 7vw, 110px);
+  background: linear-gradient(
+    180deg,
+    var(--clr-terracotta) 0%,
+    var(--clr-brown-deep) 28%,
+    var(--clr-brown-deep) 100%
+  );
+  color: var(--clr-cream);
+}
+
+.memoria-eyebrow {
+  font-family: var(--font-hand);
+  font-size: clamp(20px, 2.4vw, 30px);
+  color: var(--clr-cream);
+  margin: 0;
+}
+
+.memoria-title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 6vw, 76px);
+  line-height: 1.02;
+  margin: 4px 0 10px;
+  color: var(--clr-cream);
+  max-width: 16ch;
+}
+
+.memoria-intro {
+  margin: 0 0 clamp(32px, 4vw, 48px);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 42ch;
+  color: var(--clr-cream);
+}
+
+/* la pista horizontal: aquí es donde ocurre el "carrusel" */
+.memoria-track {
+  display: flex;
+  gap: clamp(24px, 3.4vw, 44px);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: 8px clamp(24px, 7vw, 110px) 20px 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(223, 205, 195, 0.4) transparent;
+}
+
+.memoria-track::-webkit-scrollbar {
+  height: 6px;
+}
+
+.memoria-track::-webkit-scrollbar-thumb {
+  background: rgba(223, 205, 195, 0.35);
+  border-radius: 999px;
+}
+
+/* el marco tipo polaroid: fondo crema, más padding abajo (para la nota),
+   rotado un poco distinto en cada una vía la variable --rot */
+.memoria-item {
+  flex: 0 0 auto;
+  width: clamp(220px, 26vw, 300px);
+  margin: 0;
+  scroll-snap-align: start;
+  padding: 14px 14px 32px;
+  background: var(--clr-cream);
+  border-radius: 8px;
+  box-shadow: 0 18px 40px rgba(45, 31, 30, 0.28), 0 4px 10px rgba(45, 31, 30, 0.2);
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.45s ease;
+}
+
+.memoria-item:hover,
+.memoria-item:focus-within {
+  transform: rotate(0deg) scale(1.04);
+  box-shadow: 0 26px 55px rgba(45, 31, 30, 0.36), 0 8px 18px rgba(45, 31, 30, 0.24);
+}
+
+.memoria-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--clr-sand);
+}
+
+.memoria-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* visible pero borrosa hasta el hover, no invisible del todo */
+  filter: blur(9px) saturate(0.85);
+  transform: scale(1.06);
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.memoria-item:hover .memoria-photo img,
+.memoria-item:focus-within .memoria-photo img {
+  filter: blur(0) saturate(1);
+  transform: scale(1);
+}
+
+.memoria-nota {
+  margin: 12px 4px 0;
+  font-family: var(--font-hand);
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--clr-wine);
+}

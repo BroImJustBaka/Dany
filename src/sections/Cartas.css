@@ -1,0 +1,194 @@
+.cartas {
+  position: relative;
+  z-index: 0;
+  padding: clamp(56px, 9vw, 140px) clamp(24px, 7vw, 110px);
+  background: linear-gradient(
+    180deg,
+    var(--clr-wine) 0%,
+    var(--clr-almost-black) 24%,
+    var(--clr-almost-black) 100%
+  );
+}
+
+.cartas-eyebrow {
+  font-family: var(--font-hand);
+  font-size: clamp(20px, 2.4vw, 30px);
+  color: var(--clr-terracotta);
+  margin: 0;
+}
+
+.cartas-title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 6vw, 76px);
+  line-height: 1.02;
+  margin: 4px 0 10px;
+  color: var(--clr-cream);
+  max-width: 16ch;
+}
+
+.cartas-intro {
+  margin: 0 0 clamp(28px, 4vw, 44px);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 44ch;
+  color: var(--clr-terracotta-light);
+}
+
+.cartas-btn {
+  border: none;
+  padding: 16px 34px;
+  border-radius: 999px;
+  background: var(--clr-cream);
+  color: var(--clr-wine);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 17px;
+  cursor: pointer;
+  box-shadow: 0 14px 34px rgba(45, 31, 30, 0.3);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.cartas-btn:hover {
+  background: var(--clr-terracotta-light);
+  transform: translateY(-2px);
+}
+
+/* --- panel de pantalla completa: mismo mecanismo que Palabras.css --- */
+
+.cartas-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(20, 10, 10, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.cartas-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 101;
+  text-align: center;
+  background: linear-gradient(180deg, var(--clr-wine) 0%, var(--clr-almost-black) 100%);
+  color: var(--clr-cream);
+  animation: cartas-slide-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* lo que se mueve con el scroll: todo menos el botón de cerrar. Los
+   márgenes auto del primer y último hijo lo centran cuando cabe, y
+   cuando no cabe arranca desde arriba (con justify-content:center lo
+   de arriba quedaría cortado y sin poder alcanzarse). La letra se
+   ajusta con --escala, ver useTextoQueQuepa.js */
+.cartas-scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(22px * var(--escala, 1));
+  /* arriba deja lugar para el botón de cerrar */
+  padding: clamp(76px, 9vw, 100px) clamp(20px, 6vw, 80px) clamp(32px, 6vw, 80px);
+}
+
+.cartas-scroll > :first-child {
+  margin-top: auto;
+}
+
+.cartas-scroll > :last-child {
+  margin-bottom: auto;
+}
+
+@keyframes cartas-slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.cartas-close {
+  position: absolute;
+  top: clamp(18px, 3vw, 34px);
+  right: clamp(18px, 3vw, 34px);
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(223, 205, 195, 0.14);
+  color: var(--clr-cream);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.2s ease;
+}
+
+.cartas-close:hover {
+  background: rgba(223, 205, 195, 0.28);
+}
+
+/* --- lo específico de esta sala: el "quién" se lee, el mensaje no --- */
+
+.cartas-de {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: max(15px, calc(clamp(18px, 2.2vw, 24px) * var(--escala, 1)));
+  color: var(--clr-terracotta-light);
+}
+
+.cartas-mensaje {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  /* mismo ajuste que en Palabras.css: letra x --escala con piso, y el
+     ancho no se encoge con ella */
+  max-width: min(100%, calc(34ch / var(--escala, 1)));
+  overflow-wrap: break-word;
+  font-family: var(--font-hand);
+  font-size: max(17px, calc(clamp(26px, 3.6vw, 40px) * var(--escala, 1)));
+  line-height: 1.5;
+  color: var(--clr-cream);
+  filter: blur(7px);
+  transition: filter 0.5s ease;
+}
+
+.cartas-mensaje--revelada {
+  filter: blur(0);
+}
+
+.cartas-mensaje:disabled {
+  cursor: default;
+}
+
+.cartas-pista {
+  margin: -10px 0 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(223, 205, 195, 0.6);
+}
+
+.cartas-otra {
+  flex: none;
+  margin-top: 12px;
+  padding: 14px 30px;
+  border-radius: 999px;
+  border: 2px solid rgba(223, 205, 195, 0.5);
+  background: transparent;
+  color: var(--clr-cream);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cartas-otra:hover {
+  background: rgba(223, 205, 195, 0.15);
+}
